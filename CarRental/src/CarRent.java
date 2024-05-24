@@ -35,6 +35,14 @@ public class CarRent <T extends Person> implements Serializable {
         return  car.getRentCost() * days;
     }
 
+    public T getRenter(){
+        return renter;
+    }
+
+    public Car getCar(){
+        return rentedCar;
+    }
+
     private static void addCarRent(CarRent carRent){
         extent.add(carRent);
     }

@@ -9,6 +9,7 @@ public class Manager extends Employee{
         super(name, surname, birthDate);
     }
 
+
     public void addRentalsQualif(Rental newRental){
         if(!rentalsQualif.containsKey(newRental.getRentalId())){
             rentalsQualif.put(newRental.getRentalId(), newRental);

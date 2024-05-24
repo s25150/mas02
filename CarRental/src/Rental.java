@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Rental {
+
+    private static List<Rental> extent = new ArrayList<>();
     private List<Car> cars = new ArrayList<>();
     private static Set<RentalEmployee> allEmployees = new HashSet<>();
     private List<RentalEmployee> employees = new ArrayList<>();
@@ -12,6 +14,7 @@ public class Rental {
 
     public Rental(String rentalId) {
         this.rentalId = rentalId;
+        addRental(this);
     }
 
     public void addEmployee(RentalEmployee employee) throws Exception{
@@ -28,8 +31,6 @@ public class Rental {
         if(!cars.contains(car)){
             cars.add(car);
             car.setRental(this);
-        }else{
-            System.out.println("Car " + car.getIdCar() + " already exists in this rental");
         }
 
     }
@@ -49,6 +50,22 @@ public class Rental {
         }
     }
 
+    private static void addRental(Rental rental){
+        extent.add(rental);
+    }
+    private static void removeRental(Rental rental) {
+        extent.remove(rental);
+        for(RentalEmployee re: rental.employees){
+            for(RentalEmployee allemp: allEmployees){
+                if(re==allemp){
+                    allEmployees.remove(allemp);
+                }
+            }
+            rental.removeEmployee(re);
+        }
+    }
+
+
 
     public void addManager(Manager manager){
         managers.add(manager);
@@ -63,5 +80,27 @@ public class Rental {
     public void removeEmployee(RentalEmployee employee){
         employees.remove(employee);
         allEmployees.remove(employee);
+    }
+
+    public void showCars(){
+        System.out.println("Cars in rental " + this.getRentalId());
+        for(Car c : cars){
+            System.out.print("CarId:"+c.getIdCar() + " ");
+        }
+        System.out.println();
+        System.out.println();
+    }
+
+    public void showEmployees(){
+        System.out.println("Employees in rental " + this.getRentalId());
+        for(RentalEmployee e : employees){
+            System.out.print("Employee " + e.getName() + " " + e.getSurname() + " \n");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public String toString() {
+        return "Rental [id]" + rentalId + " ";
     }
 }
