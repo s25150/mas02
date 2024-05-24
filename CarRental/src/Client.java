@@ -11,8 +11,6 @@ import java.util.stream.Stream;
 public class Client extends Person implements Serializable {
     private static List<Client> extent = new ArrayList<>();
     private List<String> likedBrands = new ArrayList<>();
-
-    private List<CarClient> carClients = new ArrayList<>();
     private int idClient;
     private static int id = 0;
 
@@ -38,9 +36,6 @@ public class Client extends Person implements Serializable {
         addClient(this);
     }
 
-    public void addCarClient(CarClient cc){
-        carClients.add(cc); //możliwe wielorazowe wypożyczanie tego samego auta przez tego samego klienta
-    }
 
     public void addLikedBrands(String... brands){
         this.likedBrands.addAll(List.of(brands));

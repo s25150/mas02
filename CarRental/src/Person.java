@@ -10,6 +10,7 @@ import java.util.List;
 public class Person implements Serializable {
     private static List<Person> extent = new ArrayList<>();
     private String name;
+    private List<CarRent> carRents = new ArrayList<>();
     private String surname;
     private LocalDate birthDate;
     protected Double discount;
@@ -29,6 +30,9 @@ public class Person implements Serializable {
     public int getAge(LocalDate birthDate){
         LocalDate currentDate = LocalDate.now();
         return Period.between(birthDate, currentDate).getYears();
+    }
+    public void addCarRent(CarRent cc){
+        carRents.add(cc); //możliwe wielorazowe wypożyczanie tego samego auta przez tego samego klienta
     }
 
     private static void addPerson(Person person) {

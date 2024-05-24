@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Car implements Serializable {
     private static List<Car> extent = new ArrayList<>();
-    private List<CarClient> carClients = new ArrayList<>();
+    private List<CarRent> carRents = new ArrayList<>();
     private Rental rental;
     private String brand;
     private String model;
@@ -49,8 +49,8 @@ public class Car implements Serializable {
         rental = null;
     }
 
-    public void addCarClient(CarClient cc){
-        carClients.add(cc); //możliwe wielorazowe wypożyczanie tego samego auta przez tego samego klienta
+    public void addCarRent(CarRent cc){
+        carRents.add(cc); //możliwe wielorazowe wypożyczanie tego samego auta przez tego samego klienta
     }
     private static void addCar(Car car){
         extent.add(car);

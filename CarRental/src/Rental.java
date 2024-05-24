@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Rental {
     private List<Car> cars = new ArrayList<>();
+    private static Set<RentalEmployee> allEmployees = new HashSet<>();
     private List<RentalEmployee> employees = new ArrayList<>();
+    private List<Manager> managers = new ArrayList<>();
     private String rentalId;
 
     public Rental(String rentalId) {
@@ -12,7 +16,11 @@ public class Rental {
 
     public void addEmployee(RentalEmployee employee) throws Exception{
         if(!employees.contains(employee)){
+            if(allEmployees.contains(employee)){
+                throw new Exception("This employee works for another rental");
+            }
             employees.add(employee);
+            allEmployees.add(employee);
         }
     }
 
@@ -26,6 +34,10 @@ public class Rental {
 
     }
 
+    public String getRentalId() {
+        return rentalId;
+    }
+
     public void removeCar(Car car){
         cars.remove(car);
         car.removeRental();
@@ -37,15 +49,19 @@ public class Rental {
         }
     }
 
-    public void addEmployees(RentalEmployee employee) {
-        employees.add(employee);
+
+    public void addManager(Manager manager){
+        managers.add(manager);
     }
 
-    public void addEmployees(List<RentalEmployee> newEmployees) {
-        employees.addAll(newEmployees);
+
+    public void removeManager(Manager manager){
+        managers.remove(manager);
     }
+
 
     public void removeEmployee(RentalEmployee employee){
         employees.remove(employee);
+        allEmployees.remove(employee);
     }
 }

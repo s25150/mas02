@@ -15,12 +15,14 @@ public class CarRent <T extends Person> implements Serializable {
     private T renter;
     private double totalCost;
 
-    public CarRent(LocalDate startDateOfRent, LocalDate endDateOfRent, Car rentedCar, T renter) {
+    public CarRent(LocalDate startDateOfRent, LocalDate endDateOfRent, Car nrentedCar, T nrenter) {
         this.startDateOfRent = startDateOfRent;
         this.endDateOfRent = endDateOfRent;
-        this.rentedCar = rentedCar;
-        this.renter = renter;
+        this.rentedCar = nrentedCar;
+        this.renter = nrenter;
         totalCost = getTotalCost(renter, rentedCar, startDateOfRent, endDateOfRent);
+        nrenter.addCarRent(this);
+        nrentedCar.addCarRent(this);
         addCarRent(this);
     }
 

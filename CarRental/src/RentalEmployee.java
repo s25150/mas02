@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 
 public class RentalEmployee extends Employee {
+    //kompozycja
     private RentalEmployee(String name, String surname, LocalDate birthDate) {
         super(name, surname, birthDate);
     }
@@ -18,5 +19,5 @@ public class RentalEmployee extends Employee {
             return employee;
 
     }
-    //kompozycja
+
 }
