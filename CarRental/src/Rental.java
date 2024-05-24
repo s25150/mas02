@@ -17,15 +17,24 @@ public class Rental {
     }
 
     public void addCars(Car car) {
-        cars.add(car);
+        if(!cars.contains(car)){
+            cars.add(car);
+            car.setRental(this);
+        }else{
+            System.out.println("Car " + car.getIdCar() + " already exists in this rental");
+        }
+
     }
 
     public void removeCar(Car car){
         cars.remove(car);
+        car.removeRental();
     }
 
     public void addCars(List<Car> newCars) {
-        cars.addAll(newCars);
+        for(Car c : newCars){
+            addCars(c);
+        }
     }
 
     public void addEmployees(RentalEmployee employee) {
